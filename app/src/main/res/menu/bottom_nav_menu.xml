@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeActivity"
+        android:icon="@drawable/home_button"
+        android:title="Strona główna" />
+    <item
+        android:id="@+id/meditationActivity"
+        android:icon="@drawable/lotus"
+        android:title="Medytacja" />
+    <item
+        android:id="@+id/historyActivity"
+        android:icon="@drawable/history"
+        android:title="Historia" />
+    <item
+        android:id="@+id/profileActivity"
+        android:icon="@drawable/user"
+        android:title="Mój profil" />
+</menu>

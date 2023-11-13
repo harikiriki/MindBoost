@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "407036097848",
+    "firebase_url": "https://mindboost-be02e-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "mindboost-be02e",
+    "storage_bucket": "mindboost-be02e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:407036097848:android:82c9b301f5371faf43bdcd",
+        "android_client_info": {
+          "package_name": "com.example.mindboost"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "407036097848-bvpfenj6kmkaj1sit7huhuvn76brvi19.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mindboost",
+            "certificate_hash": "490098e972506c9562cfb642d46ac646b5cdc7ff"
+          }
+        },
+        {
+          "client_id": "407036097848-ie7q5die3k9ru5iksqunr851gb3g9pcs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7mrmFA_SVUAQorW98lr7YWHo22MaR2uc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "407036097848-ie7q5die3k9ru5iksqunr851gb3g9pcs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

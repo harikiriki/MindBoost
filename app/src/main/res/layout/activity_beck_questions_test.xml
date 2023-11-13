@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="#E9EFF9"
+    tools:context=".BeckQuestionsTest">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/logo"
+        android:background="@drawable/rectangle2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_centerInParent="true">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:id="@+id/logoImageView"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/app_logo" />
+
+            <TextView
+                android:id="@+id/appName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MindBoost"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/logoImageView" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo"
+        android:layout_centerInParent="true">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+
+            >
+
+            <TextView
+                android:id="@+id/question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pytanie numer "
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:id="@+id/questionNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/question" />
+            <TextView
+                android:id="@+id/questionNumber2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/21"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/questionNumber" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/questionContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Treść pytania"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_below="@id/relativeLayout"
+            android:layout_centerHorizontal="true" />
+        <Button
+            android:id="@+id/btn1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/questionContent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="1"/>
+        <Button
+            android:id="@+id/btn2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/btn1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="2"/>
+        <Button
+            android:id="@+id/btn3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/btn2"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="3"/>
+        <Button
+            android:id="@+id/btn4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/btn3"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="4"/>
+    </RelativeLayout>
+
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigationBarHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#B0C9EF"
+        app:menu="@menu/bottom_nav_menu"
+        app:itemIconTint="@color/black"
+        app:itemTextColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:labelVisibilityMode="labeled"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
