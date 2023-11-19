@@ -85,27 +85,6 @@ public class BeckQuestionsTest extends AppCompatActivity {
         });
     }
 
-//    private void showBottomSheet() {
-//        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(BeckQuestionsTest.this);
-//        View bottomSheetView = LayoutInflater.from(BeckQuestionsTest.this).inflate(R.layout.becks_test_score, (ConstraintLayout)findViewById(R.id.CL_Score));
-//        TextView score = bottomSheetView.findViewById(R.id.testResult);
-//        Button knowledgeBaseBtn = bottomSheetView.findViewById(R.id.knowledgeBase);
-//        score.setText("Wynik wynosi: \n" + currentScore);
-//        knowledgeBaseBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                currentPos = random.nextInt(quizModalArrayList.size());
-//                setDataToViews(currentPos);
-//                questionAttempted = 1;
-//                currentScore = 0;
-//                bottomSheetDialog.dismiss();
-//            }
-//        });
-//        bottomSheetDialog.setCancelable(false);
-//        bottomSheetDialog.setContentView(bottomSheetView);
-//        bottomSheetDialog.show();
-//    }
-
     private void setDataToViews(int currentPos) {
         questionNumber.setText("Pytanie " + String.valueOf(questionAttempted));
         if(currentPos >= quizModalArrayList.size()) {

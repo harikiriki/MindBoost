@@ -47,8 +47,9 @@
         android:id="@+id/text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:gravity="center"
+        android:textColor="@color/black"
         android:text="Wynik Twojego testu wynosi:"
         android:textSize="26dp"
         android:textStyle="bold"
@@ -63,6 +64,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="wynik"
+        android:textColor="@color/black"
         android:textSize="26dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,27 +96,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/resultInfo"/>
 
+    <TextView
+        android:id="@+id/text2"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:text="Nie wiesz do kogo zwrócić się o pomoc?"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/phoneListActivityBtn"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:text="Kliknij tutaj, aby uzyskać pomoc!"
+        android:textAllCaps="false"
+        android:textSize="16dp"
+        android:id="@+id/phoneListActivityBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/homePageButton"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
         android:gravity="center"
-        android:text="baza wiedzy"
+        android:text="Strona główna"
         android:textSize="16dp"
-        android:id="@+id/knowledgeBase"
+        android:id="@+id/homePageButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/navigationBarHome"/>
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigationBarHome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#B0C9EF"
-        app:menu="@menu/bottom_nav_menu"
-        app:itemIconTint="@color/black"
-        app:itemTextColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:labelVisibilityMode="labeled"
-        />
 </androidx.constraintlayout.widget.ConstraintLayout>

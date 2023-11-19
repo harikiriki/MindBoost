@@ -9,38 +9,6 @@
     android:background="#E9EFF9"
     tools:context=".BecksTestHome">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/logo"
-        android:background="@drawable/rectangle2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_centerInParent="true">
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true">
-
-            <ImageView
-                android:id="@+id/logoImageView"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:src="@drawable/app_logo" />
-
-            <TextView
-                android:id="@+id/appName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="MindBoost"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/logoImageView" />
-        </RelativeLayout>
-    </RelativeLayout>
 
 
     <TextView
@@ -54,7 +22,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/becksTestPicture"
@@ -93,17 +61,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text2" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigationBarHome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#B0C9EF"
-        app:menu="@menu/bottom_nav_menu"
-        app:itemIconTint="@color/black"
-        app:itemTextColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:labelVisibilityMode="labeled"
-        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,9 @@
 package com.example.mindboost
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -41,6 +44,26 @@ class TestResultActivity : AppCompatActivity() {
         resultInfoTextView.text = resultText
         resultInfoDescriptionTextView.text = resultInfoDescription
         saveResultToFirebase(score)
+
+
+        val homePageButton = findViewById<Button>(R.id.homePageButton)
+        homePageButton.setOnClickListener {
+            val intent = Intent(this, Home::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
+
+        val phoneListButton = findViewById<Button>(R.id.phoneListActivityBtn)
+        phoneListButton.setOnClickListener {
+            navigateToPhoneListFragment()
+        }
+
+    }
+
+    private fun navigateToPhoneListFragment() {
+        val intent = Intent(this, Home::class.java) // Zastąp MainActivity nazwą aktywności zawierającej PhoneListFragment
+        intent.putExtra("NAVIGATE_TO", "PhoneListFragment")
+        startActivity(intent)
     }
 
     private fun saveResultToFirebase(score: Int) {

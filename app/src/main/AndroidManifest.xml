@@ -13,27 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
-        <activity
-            android:name=".HistoryHome"
-            android:exported="false" />
-        <activity
-            android:name=".UserProfileHome"
-            android:exported="false" />
-        <activity
-            android:name=".MeditationHome"
-            android:exported="false" />
-        <activity
-            android:name=".BaseActivity"
-            android:exported="false" />
+
         <activity
             android:name=".TestResultActivity"
             android:exported="false" />
         <activity
             android:name=".BeckQuestionsTest"
             android:exported="false" />
-        <activity
-            android:name=".BecksTestHome"
-            android:exported="false" />
+
         <activity
             android:name=".Home"
             android:exported="false" />

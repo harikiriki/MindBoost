@@ -3,19 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/homeActivity"
+        android:id="@+id/homeFragment"
         android:icon="@drawable/home_button"
         android:title="Strona główna" />
     <item
-        android:id="@+id/meditationActivity"
+        android:id="@+id/meditationFragment"
         android:icon="@drawable/lotus"
         android:title="Medytacja" />
     <item
-        android:id="@+id/historyActivity"
+        android:id="@+id/historyFragment"
         android:icon="@drawable/history"
         android:title="Historia" />
     <item
-        android:id="@+id/profileActivity"
+        android:id="@+id/profileFragment"
         android:icon="@drawable/user"
         android:title="Mój profil" />
 </menu>

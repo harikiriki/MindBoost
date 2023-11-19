@@ -140,17 +140,4 @@
     </RelativeLayout>
 
 
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigationBarHome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#B0C9EF"
-        app:menu="@menu/bottom_nav_menu"
-        app:itemIconTint="@color/black"
-        app:itemTextColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:labelVisibilityMode="labeled"
-        />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
