@@ -1,114 +1,121 @@
-package com.example.mindboost;
+package com.example.mindboost
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import android.content.Intent
+import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import java.text.SimpleDateFormat
+import java.util.*
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+class BeckQuestionsTest : AppCompatActivity() {
 
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-
-import java.util.ArrayList;
-import java.util.Random;
-
-public class BeckQuestionsTest extends AppCompatActivity {
-
-    private TextView questionNumber, question;
-    private Button btn1, btn2, btn3, btn4;
-    Random random;
-    private ArrayList<QuizModal> quizModalArrayList;
-    int currentScore = 0, questionAttempted = 1, currentPos;
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_beck_questions_test);
-
-        questionNumber = findViewById(R.id.questionNumber);
-        question = findViewById(R.id.questionContent);
-        btn1 = findViewById(R.id.btn1);
-        btn2 = findViewById(R.id.btn2);
-        btn3 = findViewById(R.id.btn3);
-        btn4 = findViewById(R.id.btn4);
-
-        quizModalArrayList = new ArrayList<>();
-        random = new Random();
-        
-        getQuizQuestions(quizModalArrayList);
-        currentPos = 0;
-        setDataToViews(currentPos);
+    private lateinit var questionNumber: TextView
+    private lateinit var question: TextView
+    private lateinit var btn1: Button
+    private lateinit var btn2: Button
+    private lateinit var btn3: Button
+    private lateinit var btn4: Button
+    private val quizModalArrayList = ArrayList<QuizModal>()
+    private var currentScore = 0
+    private var questionAttempted = 1
+    private var currentPos: Int = 0
+    private val individualQuestionScores = mutableMapOf<String, Int>()
 
 
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                currentScore += 0;
-                questionAttempted++;
-                currentPos++;
-                setDataToViews(currentPos);
-            }
-        });
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_beck_questions_test)
 
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                currentScore += 1;
-                questionAttempted++;
-                currentPos++;
-                setDataToViews(currentPos);
-            }
-        });
+        questionNumber = findViewById(R.id.questionNumber)
+        question = findViewById(R.id.questionContent)
+        btn1 = findViewById(R.id.btn1)
+        btn2 = findViewById(R.id.btn2)
+        btn3 = findViewById(R.id.btn3)
+        btn4 = findViewById(R.id.btn4)
 
-        btn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                currentScore += 2;
-                questionAttempted++;
-                currentPos++;
-                setDataToViews(currentPos);
-            }
-        });
+        getQuizQuestions(quizModalArrayList)
+        currentPos = 0
+        setDataToViews(currentPos)
 
-        btn4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                currentScore += 3;
-                questionAttempted++;
-                currentPos++;
-                setDataToViews(currentPos);
-            }
-        });
-    }
-
-    private void setDataToViews(int currentPos) {
-        questionNumber.setText("Pytanie " + String.valueOf(questionAttempted));
-        if(currentPos >= quizModalArrayList.size()) {
-            showResultScreen();
-            return;
+        btn1.setOnClickListener {
+            handleButtonClick(0)
         }
-        questionNumber.setText(String.valueOf(currentPos + 1)); // Aktualizacja numeru pytania
-        question.setText(quizModalArrayList.get(currentPos).getQuestion());
-        btn1.setText(quizModalArrayList.get(currentPos).getOption1());
-        btn2.setText(quizModalArrayList.get(currentPos).getOption2());
-        btn3.setText(quizModalArrayList.get(currentPos).getOption3());
-        btn4.setText(quizModalArrayList.get(currentPos).getOption4());
+
+        btn2.setOnClickListener {
+            handleButtonClick(1)
+        }
+
+        btn3.setOnClickListener {
+            handleButtonClick(2)
+        }
+
+        btn4.setOnClickListener {
+            handleButtonClick(3)
+        }
     }
 
-    private void showResultScreen() {
-        Intent intent = new Intent(BeckQuestionsTest.this, TestResultActivity.class);
-        intent.putExtra("SCORE", currentScore);
-        startActivity(intent);
-        finish(); // Zakończ obecną aktywność
+    private fun setDataToViews(currentPos: Int) {
+        questionNumber.text = "Pytanie $questionAttempted"
+        if (currentPos >= quizModalArrayList.size) {
+            showResultScreen()
+            return
+        }
+        question.text = quizModalArrayList[currentPos].question
+        btn1.text = quizModalArrayList[currentPos].option1
+        btn2.text = quizModalArrayList[currentPos].option2
+        btn3.text = quizModalArrayList[currentPos].option3
+        btn4.text = quizModalArrayList[currentPos].option4
     }
 
-    private void getQuizQuestions(ArrayList<QuizModal> quizModalArrayList) {
-// Pytanie 1
-        quizModalArrayList.add(new QuizModal(
+    private fun handleButtonClick(score: Int) {
+        val questionScoreKey = "question${questionAttempted}score"
+        individualQuestionScores[questionScoreKey] = score
+        currentScore += score
+        questionAttempted++
+        currentPos++
+        setDataToViews(currentPos)
+    }
+
+
+    private fun showResultScreen() {
+        val intent = Intent(this@BeckQuestionsTest, TestResultActivity::class.java).apply {
+            putExtra("SCORE", currentScore)
+            putExtra("INDIVIDUAL_SCORES", HashMap(individualQuestionScores)) // Przekazanie mapy jako Extra
+        }
+        startActivity(intent)
+        finish()
+    }
+
+    private fun updateIndividualQuestionScoreInFirebase(questionScoreKey: String, score: Int) {
+        val user = FirebaseAuth.getInstance().currentUser
+        val database = FirebaseDatabase.getInstance()
+
+        if (user != null) {
+            val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+            val date = dateFormat.format(Date())
+            val scoreUpdateMap = mapOf(questionScoreKey to score)
+
+            val resultRef = database.getReference("Users/${user.uid}/BeckTests/$date")
+            resultRef.updateChildren(scoreUpdateMap)
+                .addOnSuccessListener {
+                    // Możesz tutaj zalogować sukces lub zaktualizować UI
+                }
+                .addOnFailureListener {
+                    // Obsłuż niepowodzenie, np. wyświetlając komunikat Toast
+                }
+        } else {
+            Toast.makeText(this, "Użytkownik nie jest zalogowany.", Toast.LENGTH_LONG).show()
+        }
+    }
+
+
+    private fun getQuizQuestions(quizModalArrayList: ArrayList<QuizModal>) {
+        // Pytanie 1
+        quizModalArrayList.add(QuizModal(
                 "Odczuwanie smutku i przygnębienia",
                 "Nie jestem smutny ani przygnębiony",
                 "Często odczuwam smutek i przygnębienie",
@@ -118,7 +125,7 @@ public class BeckQuestionsTest extends AppCompatActivity {
         ));
 
 // Pytanie 2
-        quizModalArrayList.add(new QuizModal(
+        quizModalArrayList.add(QuizModal(
                 "Martwienie się o przyszłość",
                 "Nie przejmuję się zbytnio swoją przyszłością",
                 "Często martwię się o swoją przyszłość",
@@ -128,7 +135,7 @@ public class BeckQuestionsTest extends AppCompatActivity {
         ));
 
 // Pytanie 3
-        quizModalArrayList.add(new QuizModal(
+        quizModalArrayList.add(QuizModal(
                 "Uważasz, że zaniedbujesz swoje obowiązki?",
                 "Sądzę, że nie popełniam większych zaniedbań",
                 "Sądzę, że czynię więcej zaniedbań niż inni",
@@ -138,7 +145,7 @@ public class BeckQuestionsTest extends AppCompatActivity {
         ));
 
 // Pytanie 4
-        quizModalArrayList.add(new QuizModal(
+        quizModalArrayList.add(QuizModal(
                 "Jesteś zadowolony z siebie?",
                 "To co robię sprawia mi przyjemność",
                 "Nie cieszy mnie to co robię",
@@ -148,7 +155,7 @@ public class BeckQuestionsTest extends AppCompatActivity {
         ));
 
 // Pytanie 5
-        quizModalArrayList.add(new QuizModal(
+        quizModalArrayList.add(QuizModal(
                 "Czy często masz poczucie winy?",
                 "Nie czuję się winnym ani wobec siebie, ani wobec innych",
                 "Dosyć często mam wyrzuty sumienia",
@@ -158,7 +165,7 @@ public class BeckQuestionsTest extends AppCompatActivity {
         ));
 
 // Pytanie 6
-        quizModalArrayList.add(new QuizModal(
+        quizModalArrayList.add(QuizModal(
                 "Czy zasługujesz na karę?",
                 "Sądzę, że nie zasługuję na karę",
                 "Sądzę, że zasługuję na karę",
@@ -168,7 +175,7 @@ public class BeckQuestionsTest extends AppCompatActivity {
         ));
 
 // Pytanie 7
-        quizModalArrayList.add(new QuizModal(
+        quizModalArrayList.add(QuizModal(
                 "Zadowolenie z siebie",
                 "Jestem z siebie zadowolony",
                 "Nie jestem z siebie zadowolony",
@@ -178,7 +185,7 @@ public class BeckQuestionsTest extends AppCompatActivity {
         ));
 
 // Pytanie 8
-        quizModalArrayList.add(new QuizModal(
+        quizModalArrayList.add(QuizModal(
                 "Czy czujesz się gorszy od innych?",
                 "Nie czuję się gorszy od innych ludzi",
                 "Zarzucam sobie, że jestem nieudolny i popełniam błędy",
@@ -188,7 +195,7 @@ public class BeckQuestionsTest extends AppCompatActivity {
         ));
 
 // Pytanie 9
-        quizModalArrayList.add(new QuizModal(
+        quizModalArrayList.add(QuizModal(
                 "Czy masz myśli samobójcze?",
                 "Nie myślę o odebraniu sobie życia",
                 "Myślę o samobójstwie - ale nie mógłbym tego dokonać",
@@ -198,7 +205,7 @@ public class BeckQuestionsTest extends AppCompatActivity {
         ));
 
 // Pytanie 10
-        quizModalArrayList.add(new QuizModal(
+        quizModalArrayList.add(QuizModal(
                 "Często chce Ci się płakać?",
                 "Nie płaczę częściej niż zwykle",
                 "Płaczę częściej niż dawniej",
@@ -208,7 +215,7 @@ public class BeckQuestionsTest extends AppCompatActivity {
         ));
 
 // Pytanie 11
-        quizModalArrayList.add(new QuizModal(
+        quizModalArrayList.add(QuizModal(
                 "Jesteś ostatnio bardziej nerwowy i rozdrażniony?",
                 "Nie jestem bardziej podenerwowany niż dawniej",
                 "Jestem bardziej nerwowy i przykry niż dawniej",
@@ -218,7 +225,7 @@ public class BeckQuestionsTest extends AppCompatActivity {
         ));
 
 // Pytanie 12
-        quizModalArrayList.add(new QuizModal(
+        quizModalArrayList.add(QuizModal(
                 "Czy zmieniło się coś w Twoim zainteresowaniu innymi ludźmi?",
                 "Ludzie interesują mnie jak dawniej",
                 "Interesuję się ludźmi mniej niż dawniej",
@@ -228,7 +235,7 @@ public class BeckQuestionsTest extends AppCompatActivity {
         ));
 
 // Pytanie 13
-        quizModalArrayList.add(new QuizModal(
+        quizModalArrayList.add(QuizModal(
                 "Czy ostatnio bardziej masz problemy z podejmowaniem różnych decyzji?",
                 "Decyzję podejmuję łatwo, tak jak dawniej",
                 "Częściej niż kiedyś odwlekam podjęcie decyzji",
@@ -238,7 +245,7 @@ public class BeckQuestionsTest extends AppCompatActivity {
         ));
 
 // Pytanie 14
-        quizModalArrayList.add(new QuizModal(
+        quizModalArrayList.add(QuizModal(
                 "Uważasz, że wyglądasz gorzej i mniej atrakcyjnie niż kiedyś?",
                 "Sądzę, że wyglądam nie gorzej niż dawniej",
                 "Martwię się tym, że wyglądam staro i nie atrakcyjnie",
@@ -248,7 +255,7 @@ public class BeckQuestionsTest extends AppCompatActivity {
         ));
 
 // Pytanie 15
-        quizModalArrayList.add(new QuizModal(
+        quizModalArrayList.add(QuizModal(
                 "Czy masz większe trudności z wykonywaniem różnych prac i zadań?",
                 "Mogę pracować jak dawniej",
                 "Z trudem rozpoczynam każdą czynność",
@@ -258,7 +265,7 @@ public class BeckQuestionsTest extends AppCompatActivity {
         ));
 
 // Pytanie 16
-        quizModalArrayList.add(new QuizModal(
+        quizModalArrayList.add(QuizModal(
                 "Masz kłopoty ze snem?",
                 "Sypiam dobrze, jak zwykle",
                 "Sypiam gorzej niż dawniej",
@@ -268,7 +275,7 @@ public class BeckQuestionsTest extends AppCompatActivity {
         ));
 
 // Pytanie 17
-        quizModalArrayList.add(new QuizModal(
+        quizModalArrayList.add(QuizModal(
                 "Czy męczysz się bardziej, niż zwykle?",
                 "Nie męczę się bardziej niż dawniej",
                 "Męczę się znacznie łatwiej niż kiedyś",
@@ -278,7 +285,7 @@ public class BeckQuestionsTest extends AppCompatActivity {
         ));
 
 // Pytanie 18
-        quizModalArrayList.add(new QuizModal(
+        quizModalArrayList.add(QuizModal(
                 "Czy masz kłopoty z apetytem?",
                 "Mam apetyt nie gorszy niż dawniej",
                 "Mam trochę gorszy apetyt",
@@ -288,7 +295,7 @@ public class BeckQuestionsTest extends AppCompatActivity {
         ));
 
 // Pytanie 19
-        quizModalArrayList.add(new QuizModal(
+        quizModalArrayList.add(QuizModal(
                 "W ciągu ostatniego miesiąca nie stosowałem diety, aby schudnąć, lecz straciłem na wadze:",
                 "Nie tracę na wadze ciała (w okresie ostatniego miesiąca)",
                 "Straciłem na wadze więcej niż 2 kg",
@@ -298,7 +305,7 @@ public class BeckQuestionsTest extends AppCompatActivity {
         ));
 
 // Pytanie 20
-        quizModalArrayList.add(new QuizModal(
+        quizModalArrayList.add(QuizModal(
                 "Czy ostatnio bardziej martwisz się swoim stanem zdrowia?",
                 "Nie martwię się o swoje zdrowie bardziej niż zawsze",
                 "Martwię się swoimi dolegliwościami, mam rozstrój żołądka, zaparcie, bóle",
@@ -306,16 +313,5 @@ public class BeckQuestionsTest extends AppCompatActivity {
                 "Tak bardzo martwię się o swoje zdrowie, że nie mogę o niczym innym myśleć",
                 0, 1, 2, 3
         ));
-
-// Pytanie 21
-        quizModalArrayList.add(new QuizModal(
-                "Czy masz kłopoty z potencją?",
-                "Moje zainteresowania seksualne nie uległy zmianom",
-                "Jestem mniej zainteresowany sprawami płci (seksu)",
-                "Seks wyraźnie mniej mnie interesuje",
-                "Zupełnie straciłem zainteresowanie sprawami seksu",
-                0, 1, 2, 3
-        ));
-
     }
 }

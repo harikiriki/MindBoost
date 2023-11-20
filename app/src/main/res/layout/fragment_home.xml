@@ -344,6 +344,44 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/reminderLL"
+        android:background="@drawable/rectangle1"
+        app:layout_constraintTop_toBottomOf="@id/emojis2">
+
+        <ImageView
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/reminder"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/black"
+            android:layout_weight="10"
+            android:id="@+id/reminder"
+            android:text="Od 7 dni nie wykonałeś testu na depresję! Zrób go już teraz, aby sprawdzić swój stan."
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            />
+        <ImageView
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/exclamation_mark"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -353,7 +391,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/emojis2">
+        app:layout_constraintTop_toBottomOf="@id/reminderLL">
 
         <FrameLayout
             android:layout_width="0dp"
@@ -407,7 +445,7 @@
                     android:id="@+id/pic2"
                     android:layout_width="122dp"
                     android:layout_height="83dp"
-                    android:src="@drawable/bazawiedzy"
+                    android:src="@drawable/konsultant"
                     android:layout_gravity="center_horizontal"/>
                 <TextView
                     android:layout_width="wrap_content"

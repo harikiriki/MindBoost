@@ -18,6 +18,7 @@ class TestResultActivity : AppCompatActivity() {
         setContentView(R.layout.activity_test_result)
 
         val score = intent.getIntExtra("SCORE", 0)
+        val individualScores = intent.getSerializableExtra("INDIVIDUAL_SCORES") as? HashMap<String, Int>
         val scoreTextView = findViewById<TextView>(R.id.testResult)
         val resultInfoTextView = findViewById<TextView>(R.id.resultInfo) // Dodaj ten element
         val resultInfoDescriptionTextView = findViewById<TextView>(R.id.resultInfoDescription) // Dodaj ten element
@@ -43,7 +44,7 @@ class TestResultActivity : AppCompatActivity() {
 
         resultInfoTextView.text = resultText
         resultInfoDescriptionTextView.text = resultInfoDescription
-        saveResultToFirebase(score)
+        saveResultToFirebase(score, individualScores)
 
 
         val homePageButton = findViewById<Button>(R.id.homePageButton)
@@ -66,7 +67,7 @@ class TestResultActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun saveResultToFirebase(score: Int) {
+    private fun saveResultToFirebase(totalScore: Int, individualScores: HashMap<String, Int>?) {
         val user = FirebaseAuth.getInstance().currentUser
         val database = FirebaseDatabase.getInstance()
 
@@ -74,10 +75,15 @@ class TestResultActivity : AppCompatActivity() {
             val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
             val date = dateFormat.format(Date())
 
-            val resultData = mapOf(
-                "score" to score,
+            val resultData = mutableMapOf<String, Any>(
+                "totalScore" to totalScore,
                 "date" to date
             )
+
+            // Dodajemy indywidualne wyniki do danych wyników
+            individualScores?.let { scores ->
+                resultData.putAll(scores)
+            }
 
             val resultRef = database.getReference("Users/${user.uid}/BeckTests/$date")
             resultRef.setValue(resultData)
