@@ -69,6 +69,11 @@ class ProfileFragment : Fragment() {
 
         }
 
+        binding.chooseAvatarBtn.setOnClickListener {
+            val intent = Intent(activity, ChooseAvatarActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.buttonLogOut.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             val intent = Intent(activity, Login::class.java)
@@ -77,9 +82,9 @@ class ProfileFragment : Fragment() {
         }
 
         binding.buttonGoToEdit.setOnClickListener {
-//            val intent = Intent(activity, EditProfileActivity::class.java)
-//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//            startActivity(intent)
+            val intent = Intent(activity, EditProfileActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
         }
 
         binding.buttonDeleteAccount.setOnClickListener {

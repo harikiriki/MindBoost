@@ -13,14 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ChooseAvatarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditProfileActivity"
+            android:exported="false" />
         <activity
             android:name=".TestResultActivity"
             android:exported="false" />
         <activity
             android:name=".BeckQuestionsTest"
             android:exported="false" />
-
         <activity
             android:name=".Home"
             android:exported="false" />
