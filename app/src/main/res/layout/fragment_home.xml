@@ -59,290 +59,301 @@
         app:layout_constraintStart_toStartOf="parent"
         />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/emojis"
-        android:background="@drawable/rectangle3"
+        android:background="@drawable/rectangle1"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@id/welcomeTextView2"
-        android:gravity="center">
+        android:gravity="center"
+        android:id="@+id/bigCL"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/emojis"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <RelativeLayout
+                    android:id="@+id/joyRL"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/joyBtn"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/ic_joy_emoji" />
+
+                    <TextView
+                        android:id="@+id/joyText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/joyBtn"
+                        android:text="radość"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/happinessRL"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp">
+
+                    <ImageView
+                        android:id="@+id/happinessBtn"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/ic_happiness_emoji" />
+
+                    <TextView
+                        android:id="@+id/happinessText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/happinessBtn"
+                        android:text="szczęście"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/indifferenceRL"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp">
+
+                    <ImageView
+                        android:id="@+id/indifferenceBtn"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/ic_indifference_emoji" />
+
+                    <TextView
+                        android:id="@+id/indifferenceText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/indifferenceBtn"
+                        android:layout_centerHorizontal="true"
+                        android:text="obojętność"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/sadnessRL"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp">
+
+                    <ImageView
+                        android:id="@+id/sadnessBtn"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/ic_sadness_emoji" />
+
+                    <TextView
+                        android:id="@+id/sadnessText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/sadnessBtn"
+                        android:layout_centerHorizontal="true"
+                        android:text="smutek"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/cryRL"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp">
+
+                    <ImageView
+                        android:id="@+id/cryBtn"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/ic_cry_emoji" />
+
+                    <TextView
+                        android:id="@+id/cryText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/cryBtn"
+                        android:text="płacz"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/emojis2"
+            app:layout_constraintTop_toBottomOf="@id/emojis"
             android:gravity="center">
 
-            <RelativeLayout
-                android:id="@+id/joyRL"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:gravity="center"
+                android:layout_marginTop="5dp">
 
-                <ImageButton
-                    android:id="@+id/joyBtn"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/ic_joy_emoji" />
-
-                <TextView
-                    android:id="@+id/joyText"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/confidenceRL"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/joyBtn"
-                    android:text="radość"
-                    android:layout_centerHorizontal="true"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+                    android:layout_weight="1">
 
-            <RelativeLayout
-                android:id="@+id/happinessRL"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="5dp">
+                    <ImageView
+                        android:id="@+id/confidenceBtn"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/ic_confidence_emoji" />
 
-                <ImageButton
-                    android:id="@+id/happinessBtn"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/ic_happiness_emoji" />
+                    <TextView
+                        android:id="@+id/confidenceText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/confidenceBtn"
+                        android:text="odwagę"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/happinessText"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/angerRL"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/happinessBtn"
-                    android:text="szczęście"
-                    android:layout_centerHorizontal="true"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp">
 
-            <RelativeLayout
-                android:id="@+id/indifferenceRL"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="5dp">
+                    <ImageView
+                        android:id="@+id/angerBtn"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/ic_anger_emoji" />
 
-                <ImageButton
-                    android:id="@+id/indifferenceBtn"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/ic_indifference_emoji" />
+                    <TextView
+                        android:id="@+id/angerText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/angerBtn"
+                        android:text="złość"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/indifferenceText"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/disappointmentRL"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/indifferenceBtn"
-                    android:layout_centerHorizontal="true"
-                    android:text="obojętność"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp">
 
-            <RelativeLayout
-                android:id="@+id/sadnessRL"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="5dp">
+                    <ImageView
+                        android:id="@+id/disappointmentBtn"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/ic_disappointment_emoji" />
 
-                <ImageButton
-                    android:id="@+id/sadnessBtn"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/ic_sadness_emoji" />
+                    <TextView
+                        android:id="@+id/disappointmentText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/disappointmentBtn"
+                        android:layout_centerHorizontal="true"
+                        android:text="zawiedzenie"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/sadnessText"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/horrorRL"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/sadnessBtn"
-                    android:layout_centerHorizontal="true"
-                    android:text="smutek"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp">
 
-            <RelativeLayout
-                android:id="@+id/cryRL"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="5dp">
+                    <ImageView
+                        android:id="@+id/horrorBtn"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/ic_horror_emoji" />
 
-                <ImageButton
-                    android:id="@+id/cryBtn"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/ic_cry_emoji" />
+                    <TextView
+                        android:id="@+id/horrorText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/horrorBtn"
+                        android:layout_centerHorizontal="true"
+                        android:text="przerażenie"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/cryText"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/creativityRL"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/cryBtn"
-                    android:text="płacz"
-                    android:layout_centerHorizontal="true"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp">
+
+                    <ImageView
+                        android:id="@+id/creativityBtn"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/ic_creativity_emoji" />
+
+                    <TextView
+                        android:id="@+id/creativityText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/creativityBtn"
+                        android:text="kreatywność"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+            </LinearLayout>
+
         </LinearLayout>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/emojis2"
-        android:background="@drawable/rectangle4"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        app:layout_constraintTop_toBottomOf="@id/emojis"
-        android:gravity="center">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-
-            <RelativeLayout
-                android:id="@+id/confidenceRL"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <ImageButton
-                    android:id="@+id/confidenceBtn"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/ic_confidence_emoji" />
-
-                <TextView
-                    android:id="@+id/confidenceText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/confidenceBtn"
-                    android:text="odwagę"
-                    android:layout_centerHorizontal="true"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/angerRL"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="5dp">
-
-                <ImageButton
-                    android:id="@+id/angerBtn"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/ic_anger_emoji" />
-
-                <TextView
-                    android:id="@+id/angerText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/angerBtn"
-                    android:text="złość"
-                    android:layout_centerHorizontal="true"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/disappointmentRL"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="5dp">
-
-                <ImageButton
-                    android:id="@+id/disappointmentBtn"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/ic_disappointment_emoji" />
-
-                <TextView
-                    android:id="@+id/disappointmentText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/disappointmentBtn"
-                    android:layout_centerHorizontal="true"
-                    android:text="zawiedzenie"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/horrorRL"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="5dp">
-
-                <ImageButton
-                    android:id="@+id/horrorBtn"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/ic_horror_emoji" />
-
-                <TextView
-                    android:id="@+id/horrorText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/horrorBtn"
-                    android:layout_centerHorizontal="true"
-                    android:text="przerażenie"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/creativityRL"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="5dp">
-
-                <ImageButton
-                    android:id="@+id/creativityBtn"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/ic_creativity_emoji" />
-
-                <TextView
-                    android:id="@+id/creativityText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/creativityBtn"
-                    android:text="kreatywność"
-                    android:layout_centerHorizontal="true"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-        </LinearLayout>
-
-    </LinearLayout>
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -354,7 +365,7 @@
         android:layout_marginTop="10dp"
         android:id="@+id/reminderLL"
         android:background="@drawable/rectangle1"
-        app:layout_constraintTop_toBottomOf="@id/emojis2">
+        app:layout_constraintTop_toBottomOf="@id/bigCL">
 
         <ImageView
             android:layout_width="55dp"
@@ -371,7 +382,7 @@
             android:textColor="@color/black"
             android:layout_weight="10"
             android:id="@+id/reminder"
-            android:text="Od 7 dni nie wykonałeś testu na depresję! Zrób go już teraz, aby sprawdzić swój stan."
+            android:text="Za 7 dni, wykonaj test na depresję ponownie, aby sprawdzić swój aktualny stan!"
             android:gravity="center"
             android:layout_gravity="center_vertical"
             />

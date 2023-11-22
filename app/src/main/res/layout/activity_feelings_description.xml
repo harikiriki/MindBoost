@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/scrollView"
+        android:orientation="vertical"
+        android:background="#E9EFF9"
+        tools:context=".FeelingsDescription">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/logo"
+                android:background="@drawable/rectangle2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_centerInParent="true">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+
+                    <ImageView
+                        android:id="@+id/logoImageView"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:src="@drawable/app_logo" />
+
+                    <TextView
+                        android:id="@+id/appName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="MindBoost"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/logoImageView" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/text1"
+                android:text="Twój dzisiejszy stan to:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/logo"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                android:textColor="@color/black"
+                android:gravity="center"/>
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/emotionPicture"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text1"
+                android:src="@drawable/exclamation_mark"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/question1"
+                android:text="Co dzisiaj robiłeś?"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/emotionPicture"
+                android:layout_marginTop="20dp"
+                android:textSize="19sp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"/>
+            <EditText
+                android:id="@+id/editTextEmotion1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Odpowiedz szczerze i dokładnie, aby lepiej zrozumieć swoją sytuację"
+                android:inputType="textMultiLine"
+                android:textSize="16sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rectangle5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/question1"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/question2"
+                android:text="Co najbardziej wpłynęło na Twój obecny stan?"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editTextEmotion1"
+                android:layout_marginTop="20dp"
+                android:textSize="19sp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center"/>
+            <EditText
+                android:id="@+id/editTextEmotion2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Odpowiedz szczerze i dokładnie, aby lepiej zrozumieć swoją sytuację"
+                android:inputType="textMultiLine"
+                android:textSize="16sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rectangle5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/question2"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/question3"
+                android:text="Na co masz teraz ochotę?"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editTextEmotion2"
+                android:layout_marginTop="20dp"
+                android:textSize="19sp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"/>
+            <EditText
+                android:id="@+id/editTextEmotion3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Odpowiedz szczerze i dokładnie, aby lepiej zrozumieć swoją sytuację"
+                android:inputType="textMultiLine"
+                android:textSize="16sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rectangle5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/question3"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/question4"
+                android:text="Jak myślisz, co mógłbyś zrobić, aby poczuć się lepie?"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editTextEmotion3"
+                android:layout_marginTop="20dp"
+                android:textSize="19sp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"/>
+            <EditText
+                android:id="@+id/editTextEmotion4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Odpowiedz szczerze i dokładnie, aby lepiej zrozumieć swoją sytuację"
+                android:inputType="textMultiLine"
+                android:textSize="16sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rectangle5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/question4"/>
+
+            <Button
+                android:id="@+id/saveBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Zapisz"
+                android:textAllCaps="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editTextEmotion4" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </ScrollView>
