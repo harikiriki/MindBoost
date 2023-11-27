@@ -1,4 +1,4 @@
-package com.example.mindboost
+package com.example.mindboost.dataclasses
 
 data class User(var nickname : String ?= null, var email : String ?= null,
                 var password : String ?= null, var birthDate : String ?= null,

@@ -1,21 +1,18 @@
 package com.example.mindboost
 
-import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.ContentValues
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.text.Editable
 import android.util.Log
-import android.view.View
 import android.widget.DatePicker
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mindboost.databinding.ActivityEditProfileBinding
+import com.example.mindboost.dataclasses.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import java.text.SimpleDateFormat

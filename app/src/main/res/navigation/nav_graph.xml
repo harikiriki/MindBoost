@@ -47,4 +47,19 @@
         tools:layout="@layout/fragment_phone_list">
     </fragment>
 
+    <fragment
+        android:id="@+id/becksTestHistoryFragment"
+        android:name="com.example.mindboost.BecksTestsHistoryFragment"
+        android:label="fragment_history_becks_tests"
+        tools:layout="@layout/fragment_becks_tests_history">
+    </fragment>
+
+    <fragment
+        android:id="@+id/emotionsHistoryFragment"
+        android:name="com.example.mindboost.EmotionsHistoryFragment"
+        android:label="fragment_history_emotions"
+        tools:layout="@layout/fragment_emotions_history">
+    </fragment>
+
+
 </navigation>

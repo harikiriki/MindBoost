@@ -1,4 +1,4 @@
-package com.example.mindboost;
+package com.example.mindboost.dataclasses;
 
 public class QuizModal {
     private String question;
