@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mindboost.adapters.BecksTestsAdapter
-import com.example.mindboost.dataclasses.BecksTest
+import com.example.mindboost.dataclasses.BecksTestDetail
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
@@ -16,7 +16,7 @@ class BecksTestsHistoryFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: BecksTestsAdapter
-    private val becksTestsList = mutableListOf<BecksTest>()
+    private val becksTestsList = mutableListOf<BecksTestDetail>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +46,7 @@ class BecksTestsHistoryFragment : Fragment() {
                     val testDate = snapshot.child("date").getValue(String::class.java)
                     val testScore = snapshot.child("totalScore").getValue(Int::class.java)
                     if (testDate != null && testScore != null) {
-                        BecksTest(testDate, testScore)
+                        BecksTestDetail(testDate, testScore)
                     } else {
                         null
                     }

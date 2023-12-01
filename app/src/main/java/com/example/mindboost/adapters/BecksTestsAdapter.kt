@@ -1,15 +1,17 @@
 package com.example.mindboost.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mindboost.BecksTestHistoryDetails
 import com.example.mindboost.R
-import com.example.mindboost.dataclasses.BecksTest
+import com.example.mindboost.dataclasses.BecksTestDetail
 
-class BecksTestsAdapter(private val becksTestsList: List<BecksTest>) :
+class BecksTestsAdapter(private val becksTestsList: List<BecksTestDetail>) :
     RecyclerView.Adapter<BecksTestsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -22,7 +24,13 @@ class BecksTestsAdapter(private val becksTestsList: List<BecksTest>) :
         holder.testDate.text = becksTest.date
         val scoreText = "${becksTest.score} - ${getDepressionCategory(becksTest.score)}"
         holder.testScore.text = scoreText
-        // Implement details button click listener if needed
+
+        holder.detailsBtn.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, BecksTestHistoryDetails::class.java)
+            intent.putExtra("TEST_DATE", becksTest.date)
+            context.startActivity(intent)
+        }
     }
 
     private fun getDepressionCategory(score: Int): String {

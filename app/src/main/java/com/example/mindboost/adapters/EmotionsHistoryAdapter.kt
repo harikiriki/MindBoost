@@ -1,5 +1,6 @@
 package com.example.mindboost.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mindboost.EmotionsHistoryDescription
 import com.example.mindboost.dataclasses.EmotionEntry
 import com.example.mindboost.R
 
@@ -52,7 +54,19 @@ class EmotionsHistoryAdapter(private val emotionsList: MutableList<EmotionEntry>
         holder.emoji.setImageResource(emotionId)
 
         holder.detailsButton.setOnClickListener {
-            // Implementacja przekierowania do szczegółów
+            // Tworzenie Intentu do nowej aktywności
+            val intent = Intent(holder.itemView.context, EmotionsHistoryDescription::class.java)
+
+            // Dodawanie danych do Intentu
+            intent.putExtra("DATE", emotionEntry.date)
+            intent.putExtra("EMOTION_STATE", emotionEntry.emotionState)
+            intent.putExtra("ANSWER1", emotionEntry.answer1)
+            intent.putExtra("ANSWER2", emotionEntry.answer2)
+            intent.putExtra("ANSWER3", emotionEntry.answer3)
+            intent.putExtra("ANSWER4", emotionEntry.answer4)
+
+            // Startowanie nowej aktywności
+            holder.itemView.context.startActivity(intent)
         }
     }
 
