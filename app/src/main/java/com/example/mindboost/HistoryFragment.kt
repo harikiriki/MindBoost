@@ -24,6 +24,8 @@ class HistoryFragment : Fragment() {
         // Find the FrameLayouts by their IDs
         val historyBtn1 = view.findViewById<FrameLayout>(R.id.historyBtn1)
         val historyBtn2 = view.findViewById<FrameLayout>(R.id.historyBtn2)
+        val historyBtn3 = view.findViewById<FrameLayout>(R.id.historyBtn3)
+
 
         // Set click listeners for FrameLayouts
         historyBtn1.setOnClickListener {
@@ -34,6 +36,11 @@ class HistoryFragment : Fragment() {
         historyBtn2.setOnClickListener {
             // Navigate to EmotionsHistoryFragment
             findNavController().navigate(R.id.emotionsHistoryFragment)
+        }
+
+        historyBtn3.setOnClickListener {
+            // Navigate to EmotionsHistoryFragment
+            findNavController().navigate(R.id.moodChartFragment)
         }
     }
 }

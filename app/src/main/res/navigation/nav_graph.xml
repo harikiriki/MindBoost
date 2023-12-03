@@ -61,5 +61,12 @@
         tools:layout="@layout/fragment_emotions_history">
     </fragment>
 
+    <fragment
+        android:id="@+id/moodChartFragment"
+        android:name="com.example.mindboost.MoodChartFragment"
+        android:label="fragment_mood_chart"
+        tools:layout="@layout/fragment_mood_chart">
+    </fragment>
+
 
 </navigation>
