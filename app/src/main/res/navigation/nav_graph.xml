@@ -7,66 +7,86 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.mindboost.HomeFragment"
+        android:name="com.example.mindboost.homePage.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home">
     </fragment>
 
     <fragment
         android:id="@+id/meditationFragment"
-        android:name="com.example.mindboost.MeditationFragment"
+        android:name="com.example.mindboost.meditationPage.MeditationFragment"
         android:label="fragment_meditation"
         tools:layout="@layout/fragment_meditation">
     </fragment>
 
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.example.mindboost.HistoryFragment"
+        android:name="com.example.mindboost.historyPage.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history">
     </fragment>
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.mindboost.ProfileFragment"
+        android:name="com.example.mindboost.profilePage.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile">
     </fragment>
 
     <fragment
         android:id="@+id/becksTestHomeFragment"
-        android:name="com.example.mindboost.BecksTestHomeFragment"
+        android:name="com.example.mindboost.homePage.BecksTestHomeFragment"
         android:label="fragment_becks_test_home"
         tools:layout="@layout/fragment_becks_test_home">
     </fragment>
 
     <fragment
         android:id="@+id/phoneListFragment"
-        android:name="com.example.mindboost.PhoneListFragment"
+        android:name="com.example.mindboost.homePage.PhoneListFragment"
         android:label="fragment_phone_list"
         tools:layout="@layout/fragment_phone_list">
     </fragment>
 
     <fragment
         android:id="@+id/becksTestHistoryFragment"
-        android:name="com.example.mindboost.BecksTestsHistoryFragment"
+        android:name="com.example.mindboost.homePage.BecksTestsHistoryFragment"
         android:label="fragment_history_becks_tests"
         tools:layout="@layout/fragment_becks_tests_history">
     </fragment>
 
     <fragment
         android:id="@+id/emotionsHistoryFragment"
-        android:name="com.example.mindboost.EmotionsHistoryFragment"
+        android:name="com.example.mindboost.historyPage.EmotionsHistoryFragment"
         android:label="fragment_history_emotions"
         tools:layout="@layout/fragment_emotions_history">
     </fragment>
 
     <fragment
         android:id="@+id/moodChartFragment"
-        android:name="com.example.mindboost.MoodChartFragment"
+        android:name="com.example.mindboost.historyPage.MoodChartFragment"
         android:label="fragment_mood_chart"
         tools:layout="@layout/fragment_mood_chart">
     </fragment>
 
+    <fragment
+        android:id="@+id/meditationTypesFragment"
+        android:name="com.example.mindboost.meditationPage.MeditationTypesFragment"
+        android:label="fragment_meditation_types"
+        tools:layout="@layout/fragment_meditation_types">
+    </fragment>
+
+    <fragment
+        android:id="@+id/chosenMeditationTypeFragment"
+        android:name="com.example.mindboost.meditationPage.ChosenMeditationTypeFragment"
+        android:label="fragment_chosen_meditation_type"
+        tools:layout="@layout/fragment_chosen_meditation_type">
+    </fragment>
+
+    <fragment
+        android:id="@+id/meditationListFragment"
+        android:name="com.example.mindboost.meditationPage.MeditationListFragment"
+        android:label="fragment_meditation_list"
+        tools:layout="@layout/fragment_meditation_list">
+    </fragment>
 
 </navigation>

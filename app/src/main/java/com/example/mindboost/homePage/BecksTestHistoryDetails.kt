@@ -1,4 +1,4 @@
-package com.example.mindboost
+package com.example.mindboost.homePage
 
 import android.content.pm.PackageManager
 import android.graphics.Paint
@@ -25,6 +25,7 @@ import android.provider.MediaStore
 import android.provider.Settings
 import android.widget.ImageButton
 import androidx.appcompat.app.AlertDialog
+import com.example.mindboost.R
 
 
 class BecksTestHistoryDetails : AppCompatActivity() {
@@ -62,7 +63,8 @@ class BecksTestHistoryDetails : AppCompatActivity() {
             != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE)
+                MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
+            )
         }
 
         if (Environment.isExternalStorageManager()) {

@@ -1,0 +1,57 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/recCard"
+    android:layout_marginStart="20dp"
+    android:background="@drawable/rectangle1"
+    android:layout_marginEnd="20dp"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="10dp"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/LL">
+
+            <ImageView
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/baseline_play_circle_outline_24"
+                android:id="@+id/playBtn" />
+
+            <TextView
+                android:id="@+id/fileName"
+                android:layout_width="wrap_content"
+                android:text="Nazwa pliku"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/playBtn"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:text="5 minut"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fileName"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/playBtn"
+                android:textSize="20dp"/>
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

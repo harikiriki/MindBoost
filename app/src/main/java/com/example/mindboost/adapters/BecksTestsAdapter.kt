@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mindboost.BecksTestHistoryDetails
+import com.example.mindboost.homePage.BecksTestHistoryDetails
 import com.example.mindboost.R
 import com.example.mindboost.dataclasses.BecksTestDetail
 

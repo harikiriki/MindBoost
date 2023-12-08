@@ -15,31 +15,34 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".BecksTestHistoryDetails"
+            android:name=".meditationPage.MeditationActivity"
             android:exported="false" />
         <activity
-            android:name=".EmotionsHistoryDescription"
+            android:name=".homePage.BecksTestHistoryDetails"
             android:exported="false" />
         <activity
-            android:name=".FeelingsDescription"
+            android:name=".historyPage.EmotionsHistoryDescription"
             android:exported="false" />
         <activity
-            android:name=".ChooseAvatarActivity"
+            android:name=".historyPage.FeelingsDescription"
             android:exported="false" />
         <activity
-            android:name=".EditProfileActivity"
+            android:name=".profilePage.ChooseAvatarActivity"
             android:exported="false" />
         <activity
-            android:name=".TestResultActivity"
+            android:name=".profilePage.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".BeckQuestionsTest"
+            android:name=".homePage.TestResultActivity"
             android:exported="false" />
         <activity
-            android:name=".Home"
+            android:name=".homePage.BeckQuestionsTest"
             android:exported="false" />
         <activity
-            android:name=".LoginOrRegisterActivity"
+            android:name=".homePage.Home"
+            android:exported="false" />
+        <activity
+            android:name=".loginPages.LoginOrRegisterActivity"
             android:exported="true"
             android:label="@string/title_activity_login_or_register"
             android:theme="@style/Theme.MindBoost.NoActionBar">
@@ -50,13 +53,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Register"
+            android:name=".loginPages.Register"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name=".loginPages.Login"
             android:exported="false" />
         <activity
-            android:name=".CompleteGoogleSignInActivity"
+            android:name=".loginPages.CompleteGoogleSignInActivity"
             android:exported="false" />
     </application>
 

@@ -7,7 +7,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:background="#E9EFF9"
-    tools:context=".BeckQuestionsTest">
+    tools:context=".homePage.BeckQuestionsTest">
 
     <RelativeLayout
         android:layout_width="match_parent"

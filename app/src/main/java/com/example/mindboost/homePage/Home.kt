@@ -1,10 +1,11 @@
-package com.example.mindboost
+package com.example.mindboost.homePage
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
+import com.example.mindboost.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class Home : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.example.mindboost
+package com.example.mindboost.historyPage
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mindboost.R
 import com.example.mindboost.adapters.EmotionsHistoryAdapter
 import com.example.mindboost.dataclasses.EmotionEntry
 import com.google.firebase.auth.FirebaseAuth

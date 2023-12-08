@@ -146,7 +146,7 @@
 //    }
 //}
 
-package com.example.mindboost
+package com.example.mindboost.loginPages
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -154,6 +154,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.example.mindboost.databinding.ActivityLoginBinding
+import com.example.mindboost.homePage.Home
 import com.google.firebase.auth.FirebaseAuth
 
 class Login : AppCompatActivity() {

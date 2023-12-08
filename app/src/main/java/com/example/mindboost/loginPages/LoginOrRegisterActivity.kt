@@ -1,4 +1,4 @@
-package com.example.mindboost
+package com.example.mindboost.loginPages
 
 import android.content.Intent
 import android.os.Bundle

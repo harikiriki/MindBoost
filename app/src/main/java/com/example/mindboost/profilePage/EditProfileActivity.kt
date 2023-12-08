@@ -1,4 +1,4 @@
-package com.example.mindboost
+package com.example.mindboost.profilePage
 
 import android.app.DatePickerDialog
 import android.content.ContentValues
@@ -11,8 +11,10 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.mindboost.R
 import com.example.mindboost.databinding.ActivityEditProfileBinding
 import com.example.mindboost.dataclasses.User
+import com.example.mindboost.homePage.Home
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import java.text.SimpleDateFormat

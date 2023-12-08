@@ -9,7 +9,7 @@
         android:id="@+id/scrollView"
         android:orientation="vertical"
         android:background="#E9EFF9"
-        tools:context=".FeelingsDescription">
+        tools:context=".historyPage.FeelingsDescription">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

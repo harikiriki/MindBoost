@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:background="#E9EFF9"
     android:id="@+id/CL_Score"
-    tools:context=".TestResultActivity">
+    tools:context=".homePage.TestResultActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

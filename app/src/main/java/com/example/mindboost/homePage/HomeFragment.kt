@@ -1,4 +1,4 @@
-package com.example.mindboost
+package com.example.mindboost.homePage
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,8 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.mindboost.historyPage.FeelingsDescription
+import com.example.mindboost.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.FirebaseDatabase
@@ -71,9 +73,15 @@ class HomeFragment : Fragment() {
         )
 
         val emotionImageIds = listOf(
-            R.drawable.ic_joy_emoji, R.drawable.ic_happiness_emoji, R.drawable.ic_indifference_emoji,
-            R.drawable.ic_sadness_emoji, R.drawable.ic_cry_emoji, R.drawable.ic_confidence_emoji,
-            R.drawable.ic_anger_emoji, R.drawable.ic_disappointment_emoji, R.drawable.ic_horror_emoji,
+            R.drawable.ic_joy_emoji,
+            R.drawable.ic_happiness_emoji,
+            R.drawable.ic_indifference_emoji,
+            R.drawable.ic_sadness_emoji,
+            R.drawable.ic_cry_emoji,
+            R.drawable.ic_confidence_emoji,
+            R.drawable.ic_anger_emoji,
+            R.drawable.ic_disappointment_emoji,
+            R.drawable.ic_horror_emoji,
             R.drawable.ic_creativity_emoji
         )
 

@@ -1,4 +1,4 @@
-package com.example.mindboost
+package com.example.mindboost.profilePage
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -14,6 +14,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.mindboost.loginPages.Login
+import com.example.mindboost.R
 import com.example.mindboost.databinding.FragmentProfileBinding
 import com.example.mindboost.dataclasses.User
 import com.google.firebase.auth.FirebaseAuth

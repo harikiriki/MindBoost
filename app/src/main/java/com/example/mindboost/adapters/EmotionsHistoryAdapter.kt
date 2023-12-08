@@ -8,7 +8,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mindboost.EmotionsHistoryDescription
+import com.example.mindboost.historyPage.EmotionsHistoryDescription
 import com.example.mindboost.dataclasses.EmotionEntry
 import com.example.mindboost.R
 

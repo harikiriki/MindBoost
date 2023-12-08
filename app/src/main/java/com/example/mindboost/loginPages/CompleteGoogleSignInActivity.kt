@@ -1,36 +1,53 @@
-package com.example.mindboost
+package com.example.mindboost.loginPages
 
 import android.app.DatePickerDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.*
-import com.example.mindboost.databinding.ActivityRegisterBinding
+import android.widget.DatePicker
+import android.widget.PopupMenu
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.mindboost.R
+import com.example.mindboost.databinding.ActivityCompleteGoogleSignInBinding
 import com.example.mindboost.dataclasses.User
+import com.example.mindboost.homePage.Home
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
+import java.util.Calendar
 
-class Register : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
+class CompleteGoogleSignInActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
-    private lateinit var binding: ActivityRegisterBinding
-    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var binding: ActivityCompleteGoogleSignInBinding
     private lateinit var databaseReference : DatabaseReference
     private val calendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        binding = ActivityCompleteGoogleSignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        firebaseAuth = FirebaseAuth.getInstance()
-        databaseReference = FirebaseDatabase.getInstance().getReference("Users")
 
         Locale.setDefault(Locale("pl", "PL"))
 
+        setupDatePicker()
+        setupGenderPopup()
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users")
+
+        val name = intent.getStringExtra("name")
+        val lastName = intent.getStringExtra("lastName")
+        val email = intent.getStringExtra("email")
+
+        binding.completionButton.setOnClickListener {
+            saveUserData(name, lastName, email)
+        }
+    }
+
+    private fun setupDatePicker() {
         binding.birthdate.setOnClickListener {
             val locale = Locale("pl", "PL")
             DatePickerDialog(
@@ -46,7 +63,9 @@ class Register : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                 show()
             }
         }
+    }
 
+    private fun setupGenderPopup() {
         binding.gender.setOnClickListener { view ->
             val popupMenu = PopupMenu(this, view)
             popupMenu.menuInflater.inflate(R.menu.gender_menu, popupMenu.menu)
@@ -69,37 +88,25 @@ class Register : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
             }
             popupMenu.show()
         }
+    }
 
-        binding.button.setOnClickListener {
-            val email = binding.email.text.toString()
-            val password = binding.password.text.toString()
-            val nickname = binding.nickname.text.toString()
-            val birthDate = binding.birthdate.text.toString()
-            val gender = binding.gender.text.toString()
+    private fun saveUserData(nickname: String?, lastName: String?, email: String?) {
+        val birthDate = binding.birthdate.text.toString().trim()
+        val gender = binding.gender.text.toString().trim()
 
+        if (birthDate.isEmpty() || gender.isEmpty()) {
+            Toast.makeText(this, "Uzupełnij wszystkie pola!", Toast.LENGTH_SHORT).show()
+            return
+        }
 
-
-            if (email.isNotEmpty() && password.isNotEmpty() && nickname.isNotEmpty() && birthDate.isNotEmpty() && gender.isNotEmpty()) {
-                if (email.contains('@')) {
-                    firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{authResult ->
-                        if (authResult.isSuccessful) {
-                            val uid = authResult.result.user!!.uid
-                            val user = User(nickname, email, password, birthDate, gender, notifications = true)
-                            databaseReference.child(uid).setValue(user).addOnCompleteListener{
-                                if(it.isSuccessful) {
-                                    val intent = Intent(this, Login::class.java)
-                                    startActivity(intent)
-                                }
-                            }
-                        } else {
-                            Toast.makeText(this, authResult.exception.toString(), Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                } else {
-                    Toast.makeText(this, "Niewłaściwy e-mail!", Toast.LENGTH_SHORT).show()
-                }
+        val uid = FirebaseAuth.getInstance().currentUser?.uid!!
+        val user = User(nickname, email, "", birthDate, gender, notifications = true)
+        databaseReference.child(uid).setValue(user).addOnCompleteListener {
+            if (it.isSuccessful) {
+                val intent = Intent(this, Home::class.java)
+                startActivity(intent)
             } else {
-                Toast.makeText(this, "Uzupełnij wszystkie pola!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error saving user details!", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -109,6 +116,4 @@ class Register : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         findViewById<TextView>(R.id.birthdate).text = dateFormat.format(calendar.time)
     }
-
-
 }
