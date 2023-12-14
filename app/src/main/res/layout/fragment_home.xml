@@ -402,6 +402,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
+        android:id="@+id/LL2"
         app:layout_constraintTop_toBottomOf="@id/reminderLL">
 
         <FrameLayout
@@ -473,5 +474,43 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/reminder2LL"
+        android:background="@drawable/rectangle1"
+        app:layout_constraintTop_toBottomOf="@id/LL2">
+
+        <ImageView
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/ic_cry_emoji"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/black"
+            android:layout_weight="10"
+            android:id="@+id/reminder2"
+            android:text="Od trzech dni odczuwasz negatywne emocje. Jest to niepokojące, kliknij tutaj, aby dowiedzieć się więcej na temat swojego stanu."
+            android:gravity="center"
+            android:layout_gravity="center_vertical"/>
+
+        <ImageView
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/exclamation_mark"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

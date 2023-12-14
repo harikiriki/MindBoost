@@ -21,6 +21,8 @@ import com.example.mindboost.dataclasses.BecksTestDetail
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import java.io.IOException
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class BecksTestsHistoryFragment : Fragment() {
 
@@ -72,6 +74,9 @@ class BecksTestsHistoryFragment : Fragment() {
             val databaseReference = FirebaseDatabase.getInstance().getReference("Users/$userId/BeckTests")
             databaseReference.get().addOnSuccessListener { dataSnapshot ->
                 becksTestsList.clear() // Czyść listę przed dodaniem nowych elementów
+
+                val tempBecksTestsList = mutableListOf<BecksTestDetail>()
+
                 dataSnapshot.children.forEach { snapshot ->
                     val testDate = snapshot.child("date").getValue(String::class.java)
                     val testScore = snapshot.child("totalScore").getValue(Int::class.java)
@@ -87,9 +92,11 @@ class BecksTestsHistoryFragment : Fragment() {
                             answerRef.get().addOnSuccessListener { answerSnapshot ->
                                 val answerText = answerSnapshot.getValue(String::class.java) ?: ""
                                 questionsAndAnswers.add(Pair(questionText, answerText))
-                                if (questionsAndAnswers.size == 20) {
-                                    if (testDate != null && testScore != null) {
-                                        becksTestsList.add(BecksTestDetail(testDate, testScore, questionsAndAnswers))
+
+                                if (questionsAndAnswers.size == 20 && testDate != null && testScore != null) {
+                                    tempBecksTestsList.add(BecksTestDetail(testDate, testScore, questionsAndAnswers))
+                                    if (tempBecksTestsList.size == dataSnapshot.childrenCount.toInt()) {
+                                        becksTestsList.addAll(tempBecksTestsList.sortedWith(compareByDescending { LocalDate.parse(it.date, DateTimeFormatter.ofPattern("dd-MM-yyyy")) }))
                                         adapter.notifyDataSetChanged()
                                     }
                                 }
@@ -100,6 +107,7 @@ class BecksTestsHistoryFragment : Fragment() {
             }
         }
     }
+
 
 
 

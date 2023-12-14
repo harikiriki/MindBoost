@@ -19,6 +19,9 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class MoodChartFragment : Fragment() {
 
@@ -82,23 +85,32 @@ class MoodChartFragment : Fragment() {
     private fun loadDataFromFirebase() {
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                Log.d("MoodChartFragment", "Snapshot: $snapshot")
+                val sortedEntries = snapshot.children.mapNotNull { child ->
+                    val dateStr = child.child("date").getValue(String::class.java)
+                    val emotionState = child.child("emotionState").getValue(String::class.java)
+                    if (dateStr != null && emotionState != null) {
+                        try {
+                            val date = LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                            Triple(date.toEpochDay(), getEmojiResourceId(emotionState), emotionState)
+                        } catch (e: Exception) {
+                            null
+                        }
+                    } else {
+                        null
+                    }
+                }.sortedBy { it.first }
 
                 val entries = ArrayList<Entry>()
-                var xValue = 1f
-                snapshot.children.forEach { child ->
-                    val emotionState = child.child("emotionState").getValue(String::class.java)
-                    val yValue = getEmojiResourceId(emotionState)
+                var index = 1f
+                sortedEntries.forEach { (_, yValue, emotionState) ->
+                    val entry = Entry(index++, yValue)
                     val icon = getIconForEmotionState(emotionState)
-                    val entry = Entry(xValue++, yValue).apply {
-                        icon?.let {
-                            setIcon(it)
-                        }
-                    }
+                    icon?.let { entry.icon = it }
                     entries.add(entry)
                 }
 
                 val dataSet = LineDataSet(entries, "Emotion States")
+
                 if (entries.isNotEmpty()) {
                     lineChart.data = LineData(dataSet)
                     lineChart.invalidate() // Odświeżenie wykresu
@@ -112,6 +124,7 @@ class MoodChartFragment : Fragment() {
             }
         })
     }
+
 
     private fun getDrawableIdForEmotionState(emotionState: String?): Int {
         return when (emotionState) {
@@ -135,8 +148,8 @@ class MoodChartFragment : Fragment() {
         return drawable?.let {
             val bitmap = Bitmap.createScaledBitmap(
                 (it as BitmapDrawable).bitmap,
-                40, // Szerokość ikony
-                40, // Wysokość ikony
+                30, // Szerokość ikony
+                30, // Wysokość ikony
                 false
             )
             BitmapDrawable(resources, bitmap)
@@ -145,32 +158,32 @@ class MoodChartFragment : Fragment() {
 
     private fun getEmojiResourceId(emotionState: String?): Float {
         return when (emotionState) {
-            "joy" -> 1f
-            "happiness" -> 2f
-            "indifference" -> 3f
-            "sadness" -> 4f
-            "cry" -> 5f
-            "confidence" -> 6f
-            "anger" -> 7f
-            "disappointment" -> 8f
-            "horror" -> 9f
-            "creativity" -> 10f
+            "joy" -> 10f
+            "happiness" -> 9f
+            "indifference" -> 8f
+            "sadness" -> 7f
+            "cry" -> 6f
+            "confidence" -> 5f
+            "anger" -> 4f
+            "disappointment" -> 3f
+            "horror" -> 2f
+            "creativity" -> 1f
             else -> 0f
         }
     }
 
     class MyYAxisValueFormatter : ValueFormatter() {
         private val emotions = hashMapOf(
-            1f to "radość",
-            2f to "szczęście",
-            3f to "obojętność",
-            4f to "smutek",
-            5f to "płacz",
-            6f to "odwaga",
-            7f to "złość",
-            8f to "zawiedzenie",
-            9f to "przerażenie",
-            10f to "kreatywność",
+            10f to "radość",
+            9f to "szczęście",
+            8f to "obojętność",
+            7f to "smutek",
+            6f to "płacz",
+            5f to "odwaga",
+            4f to "złość",
+            3f to "zawiedzenie",
+            2f to "przerażenie",
+            1f to "kreatywność",
         )
 
         override fun getAxisLabel(value: Float, axis: AxisBase?): String {

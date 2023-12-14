@@ -19,6 +19,7 @@ class MeditationActivity : AppCompatActivity() {
     private lateinit var pauseButton: ImageButton
     private lateinit var songNameTextView: TextView
     private lateinit var meditationPicture: ImageView
+    private lateinit var description: TextView
     private lateinit var seekBar: SeekBar
     private val handler = Handler(Looper.getMainLooper())
     private val updateSeekBar = object : Runnable {
@@ -41,6 +42,8 @@ class MeditationActivity : AppCompatActivity() {
         pauseButton = findViewById(R.id.pauseButton)
         songNameTextView = findViewById(R.id.songName)
         meditationPicture = findViewById(R.id.meditationPicture)
+        description = findViewById(R.id.description)
+
 
         val audioUrl = intent.getStringExtra("AUDIO_URL") ?: return
         val meditationType = intent.getStringExtra("MEDITATION_TYPE") ?: return
@@ -48,6 +51,8 @@ class MeditationActivity : AppCompatActivity() {
 
         songNameTextView.text = songName
         setMeditationPicture(meditationType)
+        setDescriptionText(meditationType)
+
 
         mediaPlayer = MediaPlayer().apply {
             setDataSource(audioUrl)
@@ -109,6 +114,17 @@ class MeditationActivity : AppCompatActivity() {
             else -> R.drawable.meditation
         }
         meditationPicture.setImageResource(imageResId)
+    }
+
+    private fun setDescriptionText(meditationType: String) {
+        val descriptionText = when (meditationType) {
+            "mindfulness_meditation" -> "W czasie tej medytacji zwróć uwagę na swój oddech, nie oceniając go, następnie skup się na odbieraniu bodźców z otoczenia, obserwując \"tu i teraz\". \nZaangażuj wszystkie zmysły, aby w pełni być obecnym w danej chwili."
+            "breath_meditation" -> "W czasie tej medytacji zwróć szczególną uwagę na swój oddech, oddychaj w naturalnym tempie nie oceniając go, po prostu obserwuj. \nJeśli skupisz się na czymś innym, np.: myśleniu o przeszłości, nie przejmuj się, tylko spróbuj od nowa."
+            "transdental_meditation" -> "W trakcie tej medytacji powtarzaj dźwięk mantry głośno, lub w myslach, jak wolisz."
+            "metta_meditation" -> "W czasie tej medytacji chodzi o skupienie się na swojej osobie, oraz docenienie jej. Zrelaksuj się oraz powtarzaj poniższe sformułowania, aby wywołać meettę:\n\n \"Obym był/a zdrowy/a\"\n\"Obym był/a szcześliwy/a\"\n\"Obym był/a spokojny/a\"\n\nMożesz również wymyślić swoje!"
+            else -> ""
+        }
+        description.text = descriptionText
     }
 
     override fun onDestroy() {

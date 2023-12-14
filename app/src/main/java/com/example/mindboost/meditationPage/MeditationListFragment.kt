@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mindboost.MeditationListAdapter
+import com.example.mindboost.adapters.MeditationListAdapter
 import com.example.mindboost.R
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -37,23 +37,20 @@ class MeditationListFragment : Fragment() {
 
         val text1View = view.findViewById<TextView>(R.id.text1)
         val text2View = view.findViewById<TextView>(R.id.text2)
+        text2View.text = "Przed rozpoczęciem medytacji znajdź miejsce, w którym nic, ani nikt nie będzie Ci przeszkadzał, aby czuć się w pełni komfortowo. \n\n Usiądź w wygodnej dla Ciebie pozycji, np.: w siadzie skrzyżnym, wyprostuj kręgosłup, a ręce oprzyj na kolanach. Włącz jeden z dostępnych poniżej plików i spróbuj się rozluźnić."
 
         when (meditationType) {
             "mindfulness_meditation" -> {
                 text1View.text = "Medytacja uważności"
-                text2View.text = "tekst1"
             }
             "breath_meditation" -> {
                 text1View.text = "Medytacja skupiona na oddechu"
-                text2View.text = "tekst2"
             }
             "transdental_meditation" -> {
                 text1View.text = "Medytacja transcendentalna"
-                text2View.text = "tekst3"
             }
             "metta_meditation" -> {
                 text1View.text = "Medytacja metta"
-                text2View.text = "tekst4"
             }
         }
 

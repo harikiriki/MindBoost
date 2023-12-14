@@ -2,10 +2,12 @@ package com.example.mindboost.homePage
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -16,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.FirebaseDatabase
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class HomeFragment : Fragment() {
@@ -51,9 +55,13 @@ class HomeFragment : Fragment() {
             navController.navigate(R.id.phoneListFragment)
         }
 
+        view.findViewById<LinearLayout>(R.id.reminder2LL).setOnClickListener {
+            navController.navigate(R.id.badMoodFragment)
+        }
+
         setEmotionClickListeners(view)
         checkEmotionStateAndSetEmotions(view)
-
+        checkNegativeEmotionTrendAndShowReminder(view)
     }
 
     private fun loadUserNickname(userId: String, view: View) {
@@ -146,6 +154,40 @@ private fun navigateToFeelingsDescription(emotionImageId: Int) {
             }
         }
     }
+
+    private fun checkNegativeEmotionTrendAndShowReminder(view: View) {
+        val currentUser = firebaseAuth.currentUser
+        currentUser?.let { user ->
+            val databaseReference = FirebaseDatabase.getInstance().getReference("Users/${user.uid}/EmotionDiary")
+            databaseReference.get().addOnSuccessListener { dataSnapshot ->
+                val sortedEmotionsList = dataSnapshot.children.mapNotNull { snapshot ->
+                    val dateStr = snapshot.child("date").getValue(String::class.java)
+                    val emotionState = snapshot.child("emotionState").getValue(String::class.java)
+                    if (dateStr != null && emotionState != null) {
+                        val date = LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                        Pair(date, emotionState.toLowerCase(Locale.ROOT))
+                    } else {
+                        null
+                    }
+                }.sortedByDescending { it.first }.take(3) // Sortujemy i bierzemy 3 ostatnie wpisy
+
+                if (sortedEmotionsList.size == 3) {
+                    val negativeEmotions = listOf("cry", "indifference", "sadness", "disappointment", "anger")
+                    if (sortedEmotionsList.all { (_, emotionState) -> emotionState in negativeEmotions }) {
+                        view.findViewById<LinearLayout>(R.id.reminder2LL).visibility = View.VISIBLE
+                    } else {
+                        view.findViewById<LinearLayout>(R.id.reminder2LL).visibility = View.GONE
+                    }
+                } else {
+                    Log.d("HomeFragment", "Brak wystarczającej liczby danych o emocjach")
+                }
+            }.addOnFailureListener {
+                // Logowanie błędu
+                Log.e("HomeFragment", "Błąd podczas pobierania danych o emocjach", it)
+            }
+        }
+    }
+
 
     private fun highlightSelectedEmotion(view: View, dataSnapshot: DataSnapshot) {
         // Pobierz wartość 'emotionState' z dataSnapshot

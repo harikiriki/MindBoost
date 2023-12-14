@@ -11,8 +11,6 @@ import com.example.mindboost.R
 
 
 class MeditationFragment : Fragment() {
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {

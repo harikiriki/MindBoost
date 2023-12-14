@@ -12,6 +12,8 @@ import com.example.mindboost.adapters.EmotionsHistoryAdapter
 import com.example.mindboost.dataclasses.EmotionEntry
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class EmotionsHistoryFragment : Fragment() {
 
@@ -55,8 +57,7 @@ class EmotionsHistoryFragment : Fragment() {
                     } else {
                         null
                     }
-                }.toMutableList()
-                emotionsList.reverse()
+                }.sortedWith(compareByDescending { LocalDate.parse(it.date, DateTimeFormatter.ofPattern("dd-MM-yyyy")) })
                 adapter.updateData(emotionsList)
                 recyclerView.adapter = adapter
             }
