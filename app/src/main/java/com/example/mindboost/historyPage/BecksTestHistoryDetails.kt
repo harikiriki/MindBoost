@@ -1,4 +1,4 @@
-package com.example.mindboost.homePage
+package com.example.mindboost.historyPage
 
 import android.content.pm.PackageManager
 import android.graphics.Paint

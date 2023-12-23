@@ -49,7 +49,7 @@
 
     <fragment
         android:id="@+id/becksTestHistoryFragment"
-        android:name="com.example.mindboost.homePage.BecksTestsHistoryFragment"
+        android:name="com.example.mindboost.historyPage.BecksTestsHistoryFragment"
         android:label="fragment_history_becks_tests"
         tools:layout="@layout/fragment_becks_tests_history">
     </fragment>

@@ -190,7 +190,6 @@ class Login : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Uzupełnij wszystkie pola!", Toast.LENGTH_SHORT).show()
             }
-
         }
     }
 

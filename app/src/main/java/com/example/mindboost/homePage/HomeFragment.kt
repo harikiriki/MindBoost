@@ -12,7 +12,6 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.mindboost.historyPage.FeelingsDescription
 import com.example.mindboost.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -100,28 +99,28 @@ class HomeFragment : Fragment() {
         }
     }
 
-private fun navigateToFeelingsDescription(emotionImageId: Int) {
-    // Sprawdź, czy dzisiejsza data znajduje się już w bazie danych
-    val currentUser = firebaseAuth.currentUser
-    currentUser?.let { user ->
-        val databaseReference = FirebaseDatabase.getInstance().getReference("Users/${user.uid}/EmotionDiary")
-        val currentDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
-        databaseReference.child(currentDate).get().addOnSuccessListener { dataSnapshot ->
-            if (dataSnapshot.exists()) {
-                // Jeśli istnieje wpis na dzisiejszą datę, wyłącz możliwość kliknięcia na emotki
-                view?.let { nonNullView ->
-                    setEmotionsDisabled(nonNullView)
+    private fun navigateToFeelingsDescription(emotionImageId: Int) {
+        // Sprawdź, czy dzisiejsza data znajduje się już w bazie danych
+        val currentUser = firebaseAuth.currentUser
+        currentUser?.let { user ->
+            val databaseReference = FirebaseDatabase.getInstance().getReference("Users/${user.uid}/EmotionDiary")
+            val currentDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
+            databaseReference.child(currentDate).get().addOnSuccessListener { dataSnapshot ->
+                if (dataSnapshot.exists()) {
+                    // Jeśli istnieje wpis na dzisiejszą datę, wyłącz możliwość kliknięcia na emotki
+                    view?.let { nonNullView ->
+                        setEmotionsDisabled(nonNullView)
+                    }
+                } else {
+                    // Jeśli nie ma wpisu, pozwól na przechodzenie do aktywności
+                    val intent = Intent(context, FeelingsDescription::class.java).apply {
+                        putExtra("EMOTION_IMAGE_ID", emotionImageId)
+                    }
+                    startActivity(intent)
                 }
-            } else {
-                // Jeśli nie ma wpisu, pozwól na przechodzenie do aktywności
-                val intent = Intent(context, FeelingsDescription::class.java).apply {
-                    putExtra("EMOTION_IMAGE_ID", emotionImageId)
-                }
-                startActivity(intent)
             }
         }
     }
-}
 
     private fun setEmotionsDisabled(view: View) {
         val emotionIds = listOf(
@@ -233,16 +232,11 @@ private fun navigateToFeelingsDescription(emotionImageId: Int) {
         val today = Calendar.getInstance()
         lastTestDate?.let {
             val testCalendar = Calendar.getInstance().apply { time = it }
-            // Add 8 days to the last test date
+            // Test powinien być wykonywany co tydzień
             testCalendar.add(Calendar.DAY_OF_MONTH, 8)
-
-            // Calculate difference between today and the date of next expected test
+            // Oblicz datę następnego wykonania testu
             val daysUntilNextTest = daysBetween(today, testCalendar)
-
             reminderTextView.text = when {
-//                daysUntilNextTest <= 0 -> "Od ponad 7 dni nie wykonałeś \ntestu na depresję! Zrób go już \nteraz, aby sprawdzić swoj stan!"
-//                daysUntilNextTest == 1 -> "Test powinien zostać wykonany \nponownie jutro."
-//                else -> "Test na depresję powinien\n zostać wykonany ponownie\n za $daysUntilNextTest dni."
                 daysUntilNextTest <= 0 -> "Od ponad 7 dni nie wykonałeś testu na depresję! Zrób go już teraz, aby sprawdzić swoj stan."
                 daysUntilNextTest == 1 -> "Test na depresję powinien zostać wykonany ponownie jutro, aby na bieżąco kontrolować swój aktualny stan."
                 else -> "Za $daysUntilNextTest dni, wykonaj test na depresję ponownie, aby sprawdzić swój aktualny stan!"

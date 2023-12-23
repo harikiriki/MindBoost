@@ -78,8 +78,6 @@ class Register : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
             val birthDate = binding.birthdate.text.toString()
             val gender = binding.gender.text.toString()
 
-
-
             if (email.isNotEmpty() && password.isNotEmpty() && nickname.isNotEmpty() && birthDate.isNotEmpty() && gender.isNotEmpty()) {
                 if (email.contains('@')) {
                     firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{authResult ->

@@ -56,7 +56,7 @@ class MeditationActivity : AppCompatActivity() {
 
         mediaPlayer = MediaPlayer().apply {
             setDataSource(audioUrl)
-            prepare() // This could take time for streams, consider using prepareAsync().
+            prepareAsync()
             setOnPreparedListener {
                 playButton.isEnabled = true
                 handler.post(updateSeekBar)
@@ -64,9 +64,12 @@ class MeditationActivity : AppCompatActivity() {
         }
 
         playButton.setOnClickListener {
-            mediaPlayer?.start()
-            updateButtonsVisibility(isPlaying = true)
+            if (mediaPlayer?.isPlaying != true) {
+                mediaPlayer?.start()
+                updateButtonsVisibility(isPlaying = true)
+            }
         }
+
 
         pauseButton.setOnClickListener {
             mediaPlayer?.pause()

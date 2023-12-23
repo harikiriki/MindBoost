@@ -1,4 +1,4 @@
-package com.example.mindboost.homePage
+package com.example.mindboost.historyPage
 
 import android.app.AlertDialog
 import android.content.ContentValues
@@ -73,7 +73,7 @@ class BecksTestsHistoryFragment : Fragment() {
             val userId = currentUser.uid
             val databaseReference = FirebaseDatabase.getInstance().getReference("Users/$userId/BeckTests")
             databaseReference.get().addOnSuccessListener { dataSnapshot ->
-                becksTestsList.clear() // Czyść listę przed dodaniem nowych elementów
+                becksTestsList.clear()
 
                 val tempBecksTestsList = mutableListOf<BecksTestDetail>()
 
@@ -88,7 +88,8 @@ class BecksTestsHistoryFragment : Fragment() {
 
                         questionRef.get().addOnSuccessListener { questionSnapshot ->
                             val questionText = questionSnapshot.getValue(String::class.java) ?: ""
-                            val answerRef = FirebaseDatabase.getInstance().getReference("testy/test1/pytania/pytanie$i/odpowiedzi/odpowiedz${answerIndex + 1}/tresc")
+                            val answerRef = FirebaseDatabase.getInstance().
+                            getReference("testy/test1/pytania/pytanie$i/odpowiedzi/odpowiedz${answerIndex + 1}/tresc")
                             answerRef.get().addOnSuccessListener { answerSnapshot ->
                                 val answerText = answerSnapshot.getValue(String::class.java) ?: ""
                                 questionsAndAnswers.add(Pair(questionText, answerText))
@@ -96,7 +97,8 @@ class BecksTestsHistoryFragment : Fragment() {
                                 if (questionsAndAnswers.size == 20 && testDate != null && testScore != null) {
                                     tempBecksTestsList.add(BecksTestDetail(testDate, testScore, questionsAndAnswers))
                                     if (tempBecksTestsList.size == dataSnapshot.childrenCount.toInt()) {
-                                        becksTestsList.addAll(tempBecksTestsList.sortedWith(compareByDescending { LocalDate.parse(it.date, DateTimeFormatter.ofPattern("dd-MM-yyyy")) }))
+                                        becksTestsList.addAll(tempBecksTestsList.sortedWith(compareByDescending
+                                        { LocalDate.parse(it.date, DateTimeFormatter.ofPattern("dd-MM-yyyy")) }))
                                         adapter.notifyDataSetChanged()
                                     }
                                 }
@@ -116,15 +118,12 @@ class BecksTestsHistoryFragment : Fragment() {
         val paint = Paint()
         var y = 25f
         paint.textSize = 12f
-
         val titlePaint = Paint()
         titlePaint.textSize = 16f
         titlePaint.style = Paint.Style.FILL
-
         var pageInfo = PdfDocument.PageInfo.Builder(595, 842, 1).create()
         var page = pdfDocument.startPage(pageInfo)
         var canvas = page.canvas
-
         canvas.drawText("Wszystkie wyniki testów Becka", 10f, y, titlePaint)
         y += titlePaint.textSize + 10
 
@@ -140,16 +139,12 @@ class BecksTestsHistoryFragment : Fragment() {
                 canvas = page.canvas
                 y = 25f
             }
-
             canvas.drawText(dateText, 10f, y, paint)
             y += paint.descent() - paint.ascent() + 5
-
             canvas.drawText(scoreText, 10f, y, paint)
             y += paint.descent() - paint.ascent() + 5
-
             canvas.drawText(categoryText, 10f, y, paint)
             y += paint.descent() - paint.ascent() + 15
-
             testDetail.questionsAndAnswers.forEachIndexed { index, (question, answer) ->
                 val questionNumber = index + 1
                 canvas.drawText("Pytanie $questionNumber/20: $question", 10f, y, paint)
@@ -166,7 +161,6 @@ class BecksTestsHistoryFragment : Fragment() {
                 }
             }
         }
-
         pdfDocument.finishPage(page)
         savePdfFile(pdfDocument)
     }

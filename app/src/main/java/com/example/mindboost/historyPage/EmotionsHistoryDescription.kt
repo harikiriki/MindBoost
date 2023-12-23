@@ -110,7 +110,7 @@ class EmotionsHistoryDescription : AppCompatActivity() {
         var y = 25f // Koordynaty Y, od których zaczniemy pisać tekst
 
         canvas.drawText("Zapis stanu emocjonalnego z dnia: $date", 10f, y, titlePaint)
-        y += titlePaint.textSize + 10 // Dodajemy miejsce pod tytułem
+        y += titlePaint.textSize + 10 // miejsce pod tytułem
 
         questions.zip(answers).forEachIndexed { index, (question, answer) ->
             var result = drawText(canvas, "Pytanie ${index + 1}: $question", 10f, y, pageInfo.pageWidth - 20f, paint)

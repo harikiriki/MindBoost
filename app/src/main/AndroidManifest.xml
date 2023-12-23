@@ -18,13 +18,13 @@
             android:name=".meditationPage.MeditationActivity"
             android:exported="false" />
         <activity
-            android:name=".homePage.BecksTestHistoryDetails"
+            android:name=".historyPage.BecksTestHistoryDetails"
             android:exported="false" />
         <activity
             android:name=".historyPage.EmotionsHistoryDescription"
             android:exported="false" />
         <activity
-            android:name=".historyPage.FeelingsDescription"
+            android:name=".homePage.FeelingsDescription"
             android:exported="false" />
         <activity
             android:name=".profilePage.ChooseAvatarActivity"

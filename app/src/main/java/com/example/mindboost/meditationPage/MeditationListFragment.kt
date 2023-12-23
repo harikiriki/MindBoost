@@ -68,7 +68,7 @@ class MeditationListFragment : Fragment() {
                     files.add(fileRef)
                 }
                 if (context != null) {
-                    recyclerView.adapter = MeditationListAdapter(files, type, requireContext()) // Przekazujemy type do adaptera
+                    recyclerView.adapter = MeditationListAdapter(files, type, requireContext())
                 }
             }
         }
