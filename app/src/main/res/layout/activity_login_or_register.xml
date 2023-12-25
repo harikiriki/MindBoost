@@ -55,9 +55,10 @@
         android:text="Logowanie"
         android:layout_below="@id/welcomeTextView"
         android:background="@drawable/rectangle1"
-        android:layout_marginTop="50dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp" />
+        android:layout_marginTop="80dp"
+        android:textSize="18sp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp" />
 
     <Button
         android:id="@+id/registerButton"
@@ -66,38 +67,9 @@
         android:text="Rejestracja"
         android:background="@drawable/rectangle1"
         android:layout_below="@id/loginButton"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp" />
-
-    <Button
-        android:id="@+id/facebookLoginButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Logowanie przez facebooka"
-        android:background="@drawable/rectangle1"
-        android:textColor="#FFFFFF"
-        style="@style/FacebookButton"
-        app:icon="@drawable/icfacebook"
-        android:layout_below="@id/registerButton"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp" />
-
-    <Button
-        android:id="@+id/googleLoginButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Logowanie przez Google"
-        android:textColor="#FFFFFF"
-        android:background="@drawable/rectangle1"
-        app:icon="@drawable/icgoogle"
-        android:layout_below="@id/facebookLoginButton"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="48dp"
-        style="@style/FacebookButton"
-        />
+        android:layout_marginTop="50dp"
+        android:textSize="18sp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp" />
 
 </RelativeLayout>

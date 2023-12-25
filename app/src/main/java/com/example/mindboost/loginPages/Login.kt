@@ -8,6 +8,14 @@ import android.view.View
 import android.widget.Toast
 import com.example.mindboost.R
 import com.example.mindboost.databinding.ActivityLoginBinding
+import com.facebook.AccessToken
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.FacebookSdk
+import com.facebook.GraphRequest
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.example.mindboost.homePage.Home
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -18,6 +26,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FacebookAuthProvider
+import org.json.JSONException
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 
@@ -28,6 +38,7 @@ class Login : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var callbackManager: CallbackManager
 
     companion object {
         private const val RC_SIGN_IN = 9001
@@ -51,6 +62,12 @@ class Login : AppCompatActivity() {
             signInWithGoogle()
         }
 
+        FacebookSdk.sdkInitialize(applicationContext)
+        callbackManager = CallbackManager.Factory.create()
+
+        binding.facebookSignInButton.setOnClickListener {
+            signInWithFacebook()
+        }
 
         binding.button2.setOnClickListener{
             val email = binding.email.text.toString()
@@ -84,6 +101,7 @@ class Login : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        callbackManager.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
@@ -140,6 +158,79 @@ class Login : AppCompatActivity() {
         return phone.isNullOrEmpty() || birthDate.isNullOrEmpty() || gender.isNullOrEmpty()
     }
 
+    private fun signInWithFacebook() {
+        LoginManager.getInstance().logInWithReadPermissions(this, listOf("email", "public_profile"))
+        LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+            override fun onSuccess(loginResult: LoginResult) {
+                handleFacebookAccessToken(loginResult.accessToken)
+            }
+
+            override fun onCancel() {
+                // Handle cancel event
+            }
+
+            override fun onError(exception: FacebookException) {
+                Log.w(TAG, "Facebook sign-in failed", exception)
+            }
+        })
+    }
+
+    private fun handleFacebookAccessToken(token: AccessToken) {
+        val credential = FacebookAuthProvider.getCredential(token.token)
+        firebaseAuth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Handle successful sign-in
+                    val user = firebaseAuth.currentUser
+                    val userId = user?.uid
+                    if (userId != null) {
+                        val usersRef = FirebaseDatabase.getInstance().getReference("Users").child(userId)
+                        usersRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                if (!dataSnapshot.exists() || isUserDataIncomplete(dataSnapshot)) {
+                                    // Fetch additional data from Facebook
+                                    val request = GraphRequest.newMeRequest(
+                                        token
+                                    ) { jsonObject, response ->
+                                        try {
+                                            val firstName = jsonObject?.getString("first_name") ?: "" // user's first name
+                                            val lastName = jsonObject?.getString("last_name") ?: "" // user's last name
+                                            val email = jsonObject?.getString("email") ?: "" // user's email
+
+                                            val intent = Intent(this@Login, CompleteGoogleSignInActivity::class.java)
+                                            intent.putExtra("name", firstName)
+                                            intent.putExtra("lastName", lastName)
+                                            intent.putExtra("email", email)
+                                            startActivity(intent)
+                                            finish()
+
+                                        } catch (e: JSONException) {
+                                            Log.e(TAG, "JSON error when retrieving Facebook user data", e)
+                                        }
+                                    }
+
+
+                                    val parameters = Bundle()
+                                    parameters.putString("fields", "first_name,last_name,email")
+                                    request.parameters = parameters
+                                    request.executeAsync()
+                                } else {
+                                    val intent = Intent(this@Login, Home::class.java)  // Navigate them to Home or another appropriate activity
+                                    startActivity(intent)
+                                    finish()
+                                }
+                            }
+
+                            override fun onCancelled(error: DatabaseError) {
+                                Log.w(TAG, "Failed to read user data", error.toException())
+                            }
+                        })
+                    }
+                } else {
+                    Log.w(TAG, "Facebook sign-in failed", task.exception)
+                }
+            }
+    }
 
     fun registerFromLogin(view : View) {
         val intent = Intent(this, Register::class.java)

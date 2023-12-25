@@ -45,6 +45,7 @@
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:text="5 minut"
+                android:visibility="gone"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/fileName"

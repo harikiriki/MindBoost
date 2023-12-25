@@ -15,5 +15,7 @@
     <string name="emotion_description">Tego dnia %1$s</string>
     <string name="emotion_date_description">Oto zapis Twojego stanu z dnia: %1$s. %2$s.</string>
 
-
+    <string name="facebook_app_id">1805765359878998</string>
+    <string name="fb_login_protocol_scheme">fb1805765359878998</string>
+    <string name="facebook_client_token">307c1ef9eb5355cd278a608bb0369bc7</string>
 </resources>
