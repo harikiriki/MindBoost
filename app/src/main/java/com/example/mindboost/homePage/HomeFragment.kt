@@ -25,6 +25,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var reminderTextView: TextView
+    var firebaseDatabase: FirebaseDatabase = FirebaseDatabase.getInstance() // Umożliwia mockowanie
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -133,10 +134,6 @@ class HomeFragment : Fragment() {
             emotionView.alpha = 0.3f // Przyciemnij wszystkie emotki
             emotionView.setOnClickListener(null) // Usuń możliwość kliknięcia na emotki
         }
-
-        // Teraz zaznacz wybraną emotkę, która jest przypisana do dzisiejszego dnia
-        // Zastanów się, jak przechowujesz związane z nią dane, aby móc ją odpowiednio zaznaczyć
-        // Może to być np. ustawienie innej wartości alpha lub ramki wokół emotki
     }
 
     private fun checkEmotionStateAndSetEmotions(view: View) {
@@ -181,7 +178,6 @@ class HomeFragment : Fragment() {
                     Log.d("HomeFragment", "Brak wystarczającej liczby danych o emocjach")
                 }
             }.addOnFailureListener {
-                // Logowanie błędu
                 Log.e("HomeFragment", "Błąd podczas pobierania danych o emocjach", it)
             }
         }
@@ -199,7 +195,7 @@ class HomeFragment : Fragment() {
             "indifference" to R.id.indifferenceRL,
             "horror" to R.id.horrorRL,
             "anger" to R.id.angerRL,
-            "confidence" to R.id.angerRL,
+            "confidence" to R.id.confidenceRL,
             "cry" to R.id.cryRL,
             "creativity" to R.id.creativityRL,
             "disappointment" to R.id.disappointmentRL,
